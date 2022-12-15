@@ -158,20 +158,22 @@ public class CopyFile extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				String txtSelected = fileAreaTxt.getSelectedText();
-				JPopupMenu jPopupMenu = new JPopupMenu();
-				JMenuItem item1 = new JMenuItem("Cut all");
-				item1.setEnabled(txtSelected != null);
-				item1.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						fileAreaTxt.setText(fileAreaTxt.getText().replace(txtSelected, ""));
-					}
-				});
-				jPopupMenu.add(item1);
 				if (SwingUtilities.isRightMouseButton(e)) {
-					jPopupMenu.show(fileAreaTxt, e.getX(), e.getY());
+				    String txtSelected = fileAreaTxt.getSelectedText();
+	                JPopupMenu jPopupMenu = new JPopupMenu();
+	                JMenuItem item1 = new JMenuItem("Cut all");
+	                item1.setEnabled(txtSelected != null);
+	                item1.addActionListener(new ActionListener() {
+
+	                    @Override
+	                    public void actionPerformed(ActionEvent e) {
+	                        fileAreaTxt.setText(fileAreaTxt.getText().replace(txtSelected, ""));
+	                    }
+	                });
+	                jPopupMenu.add(item1);
+	                if (SwingUtilities.isRightMouseButton(e)) {
+	                    jPopupMenu.show(fileAreaTxt, e.getX(), e.getY());
+	                }
 				}
 			}
 
