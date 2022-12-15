@@ -47,7 +47,7 @@ public class Main extends JFrame {
                     }
 
                     // start GUI
-                    ImageIcon iconTitle = new ImageIcon("img\\strawberry.png");
+                    ImageIcon iconTitle = new ImageIcon("lib\\img\\Strawberry.png");
                     Main frame = new Main();
                     frame.setVisible(true);
                     frame.setSize(1024, 768);

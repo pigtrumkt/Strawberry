@@ -8,7 +8,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 public class ReadImageUtil {
 
-    public static String TESSDATA_PREFIX = "resources/";
+    public static String TESSDATA_PREFIX = "lib/readImage/";
     public static String EN = "eng";
     public static String JP = "jpn";
     public static String JP_BEST = "jpn_best";
@@ -22,7 +22,7 @@ public class ReadImageUtil {
             String result = instance.doOCR(img);
             return result;
         } catch (TesseractException e) {
-            return "Error while reading image";
+            return e.getMessage();
         }
     }
 
