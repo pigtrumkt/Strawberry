@@ -24,7 +24,8 @@ public class MappingParamSql extends JPanel {
     public MappingParamSql() {
         super();
         setLayout(null);
-
+        setSize(1024, 768);
+        
         JTextArea sqlTxt = new JTextArea();
         sqlTxt.setLineWrap(true);
         JScrollPane jScrollPane1 = new JScrollPane(sqlTxt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

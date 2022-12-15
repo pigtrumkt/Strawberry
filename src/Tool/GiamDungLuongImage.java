@@ -58,7 +58,8 @@ public class GiamDungLuongImage extends JPanel {
     public GiamDungLuongImage() {
         super();
         setLayout(null);
-
+        setSize(1024, 768);
+        
         panel = new JPanel();
         panel.setBorder(new LineBorder(Color.DARK_GRAY));
         panel.setBounds(205, 45, WIDTH_IMG_SHOW, HEIGHT_IMG_SHOW);

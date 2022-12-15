@@ -56,7 +56,8 @@ public class GetTextImage extends JPanel {
     public GetTextImage() {
         super();
         setLayout(null);
-
+        setSize(1024, 768);
+        
         JComboBox<String> comboBox = new JComboBox<String>();
         comboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "Tiếng Nhật 1", "Tiếng Nhật 2", "Tiếng Anh" }));
         comboBox.setBounds(215, 345, 133, 22);

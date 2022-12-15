@@ -37,6 +37,8 @@ public class LamDepCmt extends JPanel {
     public LamDepCmt() {
         super();
         setLayout(null);
+        setSize(1024, 768);
+        
         popup = new JPopupMenu();
 
         JButton copyBtn = new JButton("Copy");
