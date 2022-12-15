@@ -112,14 +112,24 @@ public class MappingParamSql extends JPanel {
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String sql = sqlTxt.getText().trim();
+                int countParamSql = (int) sql.chars().filter(ch -> ch == '?').count();
+                if (countParamSql == 0) {
+                    JOptionPane.showMessageDialog(null, "Câu sql không có param");
+                    return;
+                }
+                
                 String params = paramsTxt.getText().trim();
+                if (params.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Chưa nhập param");
+                    return;
+                }
+                
                 if (params.charAt(0) == '[' && params.charAt(params.length() - 1) == ']') {
                     params = params.substring(1, params.length() - 1);
                 }
 
                 String[] arrParam = params.split(",");
-                int countParamSql = (int) sql.chars().filter(ch -> ch == '?').count();
-
+                
                 if (arrParam.length != countParamSql) {
                     JOptionPane.showMessageDialog(null, "Số lượng param ko mapping với sql");
                 } else {

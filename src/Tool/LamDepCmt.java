@@ -135,7 +135,7 @@ public class LamDepCmt extends JPanel {
                     txtpnFormsetaaSet.setText("form.setA(\"a\");    // set a\r\nform.setB(\"b\");    // set b\r\nform.setC(\"c\");    // set c");
                 } else if (selectedIdx == 1) {
                     txtpnFormsetaaAbc.setText(
-                            "{\"columnA\",ItemInfo.TYPE_STR,\"2\",\"Cot A\"},// cot A\r\n  {\"columnBBB\",    ItemInfo.TYPE_STR,\"2\",\"Cot B\"},// cot B\r\n{\"columnCC\",ItemInfo.TYPE_STR,\"2\",\"Cot C\"},// cot C");
+                            "--- {\"columnA\",ItemInfo.TYPE_STR,\"2\",\"Cot A\"},// cot A\r\n--- getFormValidity().addCheckInfo(new FormCheckInfo(\"sakiKojoCode\",...");
                     txtpnFormsetaaSet.setText(
                             "{\"columnA\"  , ItemInfo.TYPE_STR, \"2\",\"Cot A\"},    // cot A\r\n{\"columnBBB\", ItemInfo.TYPE_STR, \"2\",\"Cot B\"},    // cot B\r\n{\"columnCC\" , ItemInfo.TYPE_STR, \"2\",\"Cot C\"},    // cot C");
                 }
