@@ -20,7 +20,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.FontUIResource;
 
-import org.apache.commons.lang3.StringUtils;
+import Common.StringUtils;
 
 public class LamDepCmt extends JPanel {
 
@@ -296,6 +296,6 @@ public class LamDepCmt extends JPanel {
     }
     
     public String checkTrim(String s) {
-        return removeSpace.isSelected() ? s.trim() : s.stripTrailing();
+        return removeSpace.isSelected() ? s.trim() : StringUtils.rtrim(s);
     }
 }

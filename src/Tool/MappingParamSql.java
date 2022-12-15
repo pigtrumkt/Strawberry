@@ -14,6 +14,8 @@ import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class MappingParamSql extends JPanel {
 
     /**
@@ -119,7 +121,7 @@ public class MappingParamSql extends JPanel {
                 }
                 
                 String params = paramsTxt.getText().trim();
-                if (params.isBlank()) {
+                if (StringUtils.isEmpty(params)) {
                     JOptionPane.showMessageDialog(null, "Chưa nhập param");
                     return;
                 }
