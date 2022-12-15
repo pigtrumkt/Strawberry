@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class HistoryFieldInput implements Serializable {
 
-    public static String fileTemp = System.getProperty("java.io.tmpdir") + "\\Strawberry.tmp";
+    public static String fileTemp = "lib/Strawberry.tmp";
 
     /**
      * 

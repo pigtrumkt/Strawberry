@@ -20,12 +20,15 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.FontUIResource;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class LamDepCmt extends JPanel {
 
     JPopupMenu popup;
     JTextArea oldTxt;
     JTextArea newTxt;
     JCheckBox removeEmptyLine;
+    JCheckBox removeSpace;
     JComboBox<String> comboBox;
     int selectedIdx = 0;
 
@@ -113,9 +116,14 @@ public class LamDepCmt extends JPanel {
         add(mauLabel);
 
         removeEmptyLine = new JCheckBox("Xóa line trống");
-        removeEmptyLine.setBounds(6, 650, 200, 23);
-        removeEmptyLine.setSelected(true);
+        removeEmptyLine.setBounds(6, 650, 110, 23);
+        removeEmptyLine.setSelected(false);
         add(removeEmptyLine);
+        
+        removeSpace = new JCheckBox("Xóa space phía trước");
+        removeSpace.setBounds(120, 650, 150, 23);
+        removeSpace.setSelected(false);
+        add(removeSpace);
 
         comboBox = new JComboBox<String>(new String[] { "Loại 1", "Loại 2" });
         comboBox.setBounds(41, 11, 79, 22);
@@ -156,23 +164,23 @@ public class LamDepCmt extends JPanel {
 
         List<String> newList = new ArrayList<>();
         for (String line : oldArr) {
-            line = line.trim();
+            line = checkTrim(line);
             if (line.isEmpty()) {
                 continue;
             }
 
             String[] arr = line.split("//");
-            if (arr[0].trim().length() > maxLength && arr.length != 1) {
-                maxLength = arr[0].trim().length();
+            if (checkTrim(arr[0]).length() > maxLength && arr.length != 1) {
+                maxLength = checkTrim(arr[0]).length();
             }
         }
 
         maxLength += 4;
 
         for (String line : oldArr) {
-            line = line.trim();
+            line = checkTrim(line);
             String[] arr = line.split("//");
-            int idxKeyCmt = arr[0].trim().length();
+            int idxKeyCmt = checkTrim(arr[0]).length();
             if (idxKeyCmt > -1 && arr.length > 1) {
                 newList.add(line.substring(0, idxKeyCmt) + addSpace(maxLength - idxKeyCmt) + "// " + arr[1].trim() + "\n");
             } else {
@@ -182,7 +190,7 @@ public class LamDepCmt extends JPanel {
 
         String newStr = "";
         for (String line : newList) {
-            line = line.trim();
+            line = checkTrim(line);
             if (removeEmptyLine.isSelected()) {
                 if (!line.isEmpty()) {
                     newStr += line + "\n";
@@ -202,6 +210,7 @@ public class LamDepCmt extends JPanel {
     }
 
     public void startLoai2() {
+        removeSpace.setSelected(true);
         String[] arrLineOld = oldTxt.getText().split("\n");
         List<Integer> listMaxLengthDauPhay = new ArrayList<>();
         // lặp từng line để kiếm maxlength và tổng dấu phẩy
@@ -284,5 +293,9 @@ public class LamDepCmt extends JPanel {
         }
 
         return stringBuilder.toString();
+    }
+    
+    public String checkTrim(String s) {
+        return removeSpace.isSelected() ? s.trim() : s.stripTrailing();
     }
 }
