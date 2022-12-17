@@ -73,15 +73,14 @@ public class Main extends JFrame {
         CopyFile copyFile = new CopyFile();
         tabbedPane.addTab("COPY FILE", null, copyFile, null);
 
+        XuLyChuoi xuLyChuoi = new XuLyChuoi();
+        tabbedPane.addTab("Xử lý chuỗi", null, xuLyChuoi, null);
+        
         LamDepCmt lamDepCmt = new LamDepCmt();
         tabbedPane.addTab("Làm đẹp SOURCE", null, lamDepCmt, null);
 
         MappingParamSql mappingParamSql = new MappingParamSql();
         tabbedPane.addTab("Mapping param SQL", null, mappingParamSql, null);
-
-        XuLyChuoi xuLyChuoi = new XuLyChuoi();
-        tabbedPane.addTab("Xử lý chuỗi", null, xuLyChuoi, null);
-        tabbedPane.setBackgroundAt(3, Color.LIGHT_GRAY);
 
         GetTextImage getTextImage = new GetTextImage();
         tabbedPane.addTab("Get text from IMAGE", null, getTextImage, null);

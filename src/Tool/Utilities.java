@@ -189,7 +189,7 @@ public class Utilities extends JPanel {
         
         panel_1 = new JPanel();
         panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-        panel_1.setBounds(10, 323, 993, 131);
+        panel_1.setBounds(10, 323, 993, 52);
         add(panel_1);
         
         killAllJava = new JButton("Kill all java");
