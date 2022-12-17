@@ -1,275 +1,142 @@
 package Tool;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.border.LineBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.googlecode.pngtastic.core.PngImage;
-import com.googlecode.pngtastic.core.PngOptimizer;
-
-import Common.ImageUtils;
+import Common.CmdUtils;
 
 public class DonDepWin extends JPanel {
 
     public static final int WIDTH_IMG_SHOW = 600;
     public static final int HEIGHT_IMG_SHOW = 600;
-
-    JPanel panel;
+    JCheckBox temp;
+    JCheckBox tempWin;
+    JCheckBox prefetch;
+    JCheckBox softwareDistribution;
+    JCheckBox windowsOld;
+    JCheckBox recycleBin;
+    JCheckBox download;
+    JCheckBox chckbxDisableComputerrEstore;
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
-    private static BufferedImage imgBuff = null;
 
     public DonDepWin() {
         super();
         setLayout(null);
         setSize(1024, 768);
-        
-        panel = new JPanel();
-        panel.setBorder(new LineBorder(Color.DARK_GRAY));
-        panel.setBounds(205, 45, WIDTH_IMG_SHOW, HEIGHT_IMG_SHOW);
-        panel.addMouseListener(new MouseListener() {
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
+        temp = new JCheckBox("Temp");
+        temp.setBounds(6, 7, 245, 23);
+        temp.setSelected(true);
+        add(temp);
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
+        tempWin = new JCheckBox("Windows/temp");
+        tempWin.setBounds(6, 33, 245, 23);
+        tempWin.setSelected(true);
+        add(tempWin);
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
+        prefetch = new JCheckBox("Windows/Prefetch");
+        prefetch.setBounds(6, 59, 245, 23);
+        prefetch.setSelected(true);
+        add(prefetch);
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+        softwareDistribution = new JCheckBox("Windows/SoftwareDistribution");
+        softwareDistribution.setBounds(6, 85, 245, 23);
+        softwareDistribution.setSelected(true);
+        add(softwareDistribution);
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    JFileChooser fc = new JFileChooser();
-                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image", "jpg", "png", "jpeg");
-                    fc.setFileFilter(filter);
-                    int returnVal = fc.showOpenDialog(null);
+        windowsOld = new JCheckBox("Windows.old");
+        windowsOld.setBounds(6, 111, 245, 23);
+        windowsOld.setSelected(true);
+        add(windowsOld);
 
-                    if (returnVal == JFileChooser.APPROVE_OPTION) {
-                        File file = fc.getSelectedFile();
-                        imgBuff = ImageIO.read(file);
-                        drawImagePanel();
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+        recycleBin = new JCheckBox("Thùng rác");
+        recycleBin.setBounds(6, 137, 245, 23);
+        recycleBin.setSelected(true);
+        add(recycleBin);
+
+        download = new JCheckBox("Thư mục Downloads");
+        download.setBounds(6, 163, 245, 23);
+        add(download);
+
+        chckbxDisableComputerrEstore = new JCheckBox("Disable computer restore");
+        chckbxDisableComputerrEstore.setBounds(304, 7, 245, 23);
+        chckbxDisableComputerrEstore.setSelected(true);
+        add(chckbxDisableComputerrEstore);
+
+        JButton start = new JButton("Start");
+        start.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
             }
         });
-        add(panel);
-        panel.setLayout(null);
+        start.setBounds(6, 219, 89, 23);
+        add(start);
 
-        JLabel label = new JLabel("Chọn file hoặc CTRL + V");
-        label.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        label.setBounds(130, 220, 429, 120);
-        panel.add(label);
-
-        JButton btnNewButton = new JButton("Start");
-        btnNewButton.setBounds(810, 47, 89, 23);
-        btnNewButton.addActionListener(new ActionListener() {
+        // handle
+        start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    if (imgBuff != null) {
-                        JFileChooser fileChooser = new JFileChooser();
-                        fileChooser.setDialogTitle("Lưu file");
-                        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG", "jpg");
-                        fileChooser.setFileFilter(filter);
-                        int userSelection = fileChooser.showSaveDialog(null);
-
-                        if (userSelection == JFileChooser.APPROVE_OPTION) {
-                            File fileToSaveTemp = fileChooser.getSelectedFile();
-                            String filename = fileToSaveTemp.getName();
-                            if (filename.indexOf(".jpg") != filename.length() - 4) {
-                                filename += ".jpg";
-                            }
-                            
-                            File fileToSave = new File(fileToSaveTemp.getParent() + "\\" + filename);
-                            
-                            ByteArrayOutputStream imgBuffB = new ByteArrayOutputStream();
-                            ImageIO.write(imgBuff, "png", fileToSave);
-//                            PngImage pngImage = new PngImage(imgBuffB.toByteArray());
-//                            PngOptimizer optimizer = new PngOptimizer();
-//                            PngImage response = optimizer.optimize(pngImage, true, null);
-//                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                            response.writeDataOutputStream(baos);
-//                            
-//                            ImageIO.write(ImageUtils.toBufferedImage(baos.toByteArray()), "png", fileToSave);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Chưa có hình nào");
-                    }
-                } catch (Exception e1) {
-                    e1.printStackTrace();
+                if (!CmdUtils.isAdmin()) {
+                    JOptionPane.showMessageDialog(null, "Hãy Run as administrator");
+                    return;
                 }
+
+                Object[] options = { "Yes", "No" };
+                int result = JOptionPane.showOptionDialog(null, "Hãy tắt hết chương trình đang chạy", "Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+                if (result != JOptionPane.YES_OPTION) {
+                    return;
+                }
+
+                if (temp.isSelected()) {
+                    CmdUtils.runCmd("del %temp%\\*.* /s /q");
+                }
+
+                if (tempWin.isSelected()) {
+                    CmdUtils.runCmd("del %systemdrive%\\Windows\\Temp\\*.* /s /q");
+                }
+
+                if (prefetch.isSelected()) {
+                    CmdUtils.runCmd("del %systemdrive%\\Windows\\Prefetch\\*.* /s /q");
+                }
+
+                if (softwareDistribution.isSelected()) {
+                    CmdUtils.runCmd("del %systemdrive%\\Windows\\SoftwareDistribution\\*.* /s /q");
+                }
+
+                if (windowsOld.isSelected()) {
+                    CmdUtils.runCmd("del %systemdrive%\\windows.old\\*.* /s /q");
+                }
+
+                if (recycleBin.isSelected()) {
+                    CmdUtils.runPowershell("Clear-RecycleBin -Force");
+                }
+
+                if (download.isSelected()) {
+                    CmdUtils.runCmd("del %systemdrive%\\Users\\%username%\\Downloads\\*.* /s /q");
+                }
+
+                if (chckbxDisableComputerrEstore.isSelected()) {
+                    CmdUtils.runPowershell("Disable-ComputerRestore -Drive \"C:\\\"");
+                    CmdUtils.runPowershell("Disable-ComputerRestore -Drive \"D:\\\"");
+                    CmdUtils.runPowershell("Disable-ComputerRestore -Drive \"E:\\\"");
+                }
+
+                int result1 = JOptionPane.showOptionDialog(null, "Restart PC?", "Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+                if (result1 != JOptionPane.YES_OPTION) {
+                    return;
+                }
+
+                // restart pc
+                CmdUtils.runCmd("shutdown /r -t 0");
             }
         });
-        add(btnNewButton);
-
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.setBounds(810, 620, 89, 23);
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                clear();
-            }
-        });
-        add(btnNewButton_1);
-
-        KeyStroke ctrlV = KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK);
-        registerKeyboardAction(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clear();
-                imgBuff = pasteImageFromClipboard();
-                drawImagePanel();
-
-            }
-        }, ctrlV, JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
-    public void drawImagePanel() {
-        if (imgBuff != null) {
-            panel.removeAll();
-            JLabel imgShow = new JLabel(new ImageIcon(resize(imgBuff)));
-            imgShow.setBounds(0, 0, WIDTH_IMG_SHOW, HEIGHT_IMG_SHOW);
-            panel.add(imgShow);
-            panel.repaint();
-        } else {
-            clear();
-        }
-    }
-
-    public void clear() {
-        panel.removeAll();
-        imgBuff = null;
-        JLabel label = new JLabel("Chọn file hoặc CTRL + V");
-        label.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        label.setBounds(130, 220, 429, 120);
-        panel.add(label);
-        panel.repaint();
-    }
-
-    public BufferedImage resize(BufferedImage img) {
-        double scaleWidth = (double) WIDTH_IMG_SHOW / (double) img.getWidth();
-        double scaleHeight = (double) HEIGHT_IMG_SHOW / (double) img.getHeight();
-        double scale = 1d;
-
-        if (scaleWidth < scaleHeight) {
-            scale = scaleWidth;
-        } else {
-            scale = scaleHeight;
-        }
-
-        double width = (double) img.getWidth() * scale - 2;
-        double height = (double) img.getHeight() * scale - 2;
-
-        Image tmp = img.getScaledInstance((int) width, (int) height, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage((int) width, (int) height, img.getType());
-
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-
-        return dimg;
-    }
-
-    /**
-     * Obtains a BufferedImage from the clipboard.
-     *
-     * @return the obtained image, null if not available
-     * @see BufferedImage#TYPE_INT_RGB
-     */
-    public BufferedImage pasteImageFromClipboard() {
-        java.awt.image.BufferedImage result;
-        int width;
-        int height;
-        Graphics g;
-        Image img = pasteFromClipboard();
-
-        result = null;
-        if (img != null) {
-            width = img.getWidth(null);
-            height = img.getHeight(null);
-            result = new java.awt.image.BufferedImage(width, height, java.awt.image.BufferedImage.TYPE_INT_RGB);
-            g = result.createGraphics();
-            g.drawImage(img, 0, 0, null);
-            g.dispose();
-        }
-
-        return result;
-    }
-
-    /**
-     * Obtains an object from the clipboard.
-     *
-     * @param flavor the type of object to obtain
-     * @return the obtained object, null if not available
-     */
-    public Image pasteFromClipboard() {
-        Clipboard clipboard;
-        Image result;
-        Transferable content;
-
-        result = null;
-        try {
-            clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            content = clipboard.getContents(null);
-            if ((content != null))
-                if (content.isDataFlavorSupported(DataFlavor.imageFlavor)) {
-                    result = (Image) content.getTransferData(DataFlavor.imageFlavor);
-                } else if (content.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
-                    @SuppressWarnings("unchecked")
-                    List<File> listFile = (List<File>) content.getTransferData(DataFlavor.javaFileListFlavor);
-                    File file = listFile.get(0);
-                    result = ImageIO.read(file);
-                }
-        } catch (Exception e) {
-            result = null;
-        }
-
-        return result;
-    }
 }

@@ -20,10 +20,6 @@ import Tool.LamDepCmt;
 import Tool.MappingParamSql;
 
 public class Main extends JFrame {
-    // todo
-    // làm tiếp giảm dung lượng img
-    // sửa lại format code. thêm checkbox trimleft
-    // thêm dọn dẹp rác window
 
     /**
      * 
@@ -95,6 +91,5 @@ public class Main extends JFrame {
         
         DonDepWin donDepWin = new DonDepWin();
         tabbedPane.addTab("Dọn dẹp windows", null, donDepWin, null);
-        tabbedPane.setBackgroundAt(6, Color.LIGHT_GRAY);
     }
 }
