@@ -162,7 +162,7 @@ public class GetTextImage extends JPanel {
                     String rs = ReadImageUtil.crackImage(imgBuff, language);
                     textArea.setText(rs.replace(" ", ""));
                 } else {
-                    JOptionPane.showMessageDialog(null, "Chưa có hình nào");
+                    JOptionPane.showMessageDialog(null, "Chưa chọn hình");
                 }
             }
         });

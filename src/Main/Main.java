@@ -13,11 +13,12 @@ import javax.swing.JTabbedPane;
 
 import Common.HistoryFieldInput;
 import Tool.CopyFile;
-import Tool.DonDepWin;
+import Tool.Utilities;
 import Tool.GetTextImage;
 import Tool.GiamDungLuongImage;
 import Tool.LamDepCmt;
 import Tool.MappingParamSql;
+import Tool.XuLyChuoi;
 
 public class Main extends JFrame {
 
@@ -78,18 +79,18 @@ public class Main extends JFrame {
         MappingParamSql mappingParamSql = new MappingParamSql();
         tabbedPane.addTab("Mapping param SQL", null, mappingParamSql, null);
 
-        JPanel panel_7 = new JPanel();
-        tabbedPane.addTab("Xử lý chuỗi", null, panel_7, null);
+        XuLyChuoi xuLyChuoi = new XuLyChuoi();
+        tabbedPane.addTab("Xử lý chuỗi", null, xuLyChuoi, null);
         tabbedPane.setBackgroundAt(3, Color.LIGHT_GRAY);
 
         GetTextImage getTextImage = new GetTextImage();
         tabbedPane.addTab("Get text from IMAGE", null, getTextImage, null);
 
-        GiamDungLuongImage giamDungLuongImage = new GiamDungLuongImage();
-        tabbedPane.addTab("Giảm dung lượng IMAGE", null, giamDungLuongImage, null);
-        tabbedPane.setBackgroundAt(5, Color.LIGHT_GRAY);
+//        GiamDungLuongImage giamDungLuongImage = new GiamDungLuongImage();
+//        tabbedPane.addTab("Giảm dung lượng IMAGE", null, giamDungLuongImage, null);
+//        tabbedPane.setBackgroundAt(5, Color.LIGHT_GRAY);
         
-        DonDepWin donDepWin = new DonDepWin();
-        tabbedPane.addTab("Dọn dẹp windows", null, donDepWin, null);
+        Utilities utilities = new Utilities();
+        tabbedPane.addTab("Utilities", null, utilities, null);
     }
 }

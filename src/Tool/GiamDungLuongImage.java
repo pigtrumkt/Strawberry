@@ -118,18 +118,10 @@ public class GiamDungLuongImage extends JPanel {
                             
                             File fileToSave = new File(fileToSaveTemp.getParent() + "\\" + filename);
                             
-                            ByteArrayOutputStream imgBuffB = new ByteArrayOutputStream();
-                            ImageIO.write(imgBuff, "png", fileToSave);
-//                            PngImage pngImage = new PngImage(imgBuffB.toByteArray());
-//                            PngOptimizer optimizer = new PngOptimizer();
-//                            PngImage response = optimizer.optimize(pngImage, true, null);
-//                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                            response.writeDataOutputStream(baos);
-//                            
-//                            ImageIO.write(ImageUtils.toBufferedImage(baos.toByteArray()), "png", fileToSave);
+                            // ImageIO.write(imgBuff, "png", fileToSave);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Chưa có hình nào");
+                        JOptionPane.showMessageDialog(null, "Chưa chọn hình");
                     }
                 } catch (Exception e1) {
                     e1.printStackTrace();
