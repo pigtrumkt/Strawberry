@@ -21,6 +21,8 @@ public class Utilities extends JPanel {
 
     public static final int WIDTH_IMG_SHOW = 600;
     public static final int HEIGHT_IMG_SHOW = 600;
+    Object[] options = { "Yes", "No" };
+    
     JCheckBox temp;
     JCheckBox tempWin;
     JCheckBox prefetch;
@@ -34,6 +36,8 @@ public class Utilities extends JPanel {
      * 
      */
     private static final long serialVersionUID = 1L;
+    private JPanel panel_1;
+    private JButton killAllJava;
 
     public Utilities() {
         super();
@@ -82,7 +86,6 @@ public class Utilities extends JPanel {
                                     return;
                                 }
                 
-                                Object[] options = { "Yes", "No" };
                                 int result = JOptionPane.showOptionDialog(null, "Hãy tắt hết chương trình đang chạy", "Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
                                 if (result != JOptionPane.YES_OPTION) {
                                     return;
@@ -183,5 +186,40 @@ public class Utilities extends JPanel {
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblNewLabel.setBounds(10, 11, 212, 25);
         add(lblNewLabel);
+        
+        panel_1 = new JPanel();
+        panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+        panel_1.setBounds(10, 323, 993, 131);
+        add(panel_1);
+        
+        killAllJava = new JButton("Kill all java");
+        killAllJava.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                int result = JOptionPane.showOptionDialog(null, "Kill all java?", "Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+                if (result != JOptionPane.YES_OPTION) {
+                    return;
+                }
+                
+                CmdUtils.runCmd("start taskkill /f /im jqs.exe", "start taskkill /f /im javaw.exe", "start taskkill /f /im java.exe");
+            }
+        });
+        
+        GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+        gl_panel_1.setHorizontalGroup(
+            gl_panel_1.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panel_1.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(killAllJava)
+                    .addContainerGap(902, Short.MAX_VALUE))
+        );
+        gl_panel_1.setVerticalGroup(
+            gl_panel_1.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panel_1.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(killAllJava)
+                    .addContainerGap(97, Short.MAX_VALUE))
+        );
+        panel_1.setLayout(gl_panel_1);
     }
 }

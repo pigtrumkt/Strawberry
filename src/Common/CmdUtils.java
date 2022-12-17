@@ -6,9 +6,14 @@ import java.util.Scanner;
 
 public class CmdUtils {
 
-    public static void runCmd(String cmd) {
+    public static void runCmd(String... cmd) {
         try {
-            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"" + cmd + " && exit\"");
+            String cmds = "";
+            for (String s : cmd) {
+                cmds += s + " && ";
+            }
+            
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"" + cmds + "exit\"");
         } catch (IOException e) {
         }
     }
@@ -23,6 +28,7 @@ public class CmdUtils {
         }
     }
 
+    @SuppressWarnings("resource")
     public static boolean isAdmin() {
         try {
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe");
