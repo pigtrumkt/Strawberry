@@ -2,6 +2,7 @@ package Tool;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -108,6 +109,8 @@ public class Utilities extends JPanel {
                                 }
                 
                                 if (windowsOld.isSelected()) {
+                                    File f = new File("C:\\windows.old");
+                                    f.mkdirs();
                                     CmdUtils.runCmd("del %systemdrive%\\windows.old\\*.* /s /q");
                                 }
                 
@@ -116,7 +119,7 @@ public class Utilities extends JPanel {
                                 }
                 
                                 if (download.isSelected()) {
-                                    CmdUtils.runCmd("del %systemdrive%\\Users\\%username%\\Downloads\\*.* /s /q");
+                                    CmdUtils.runCmd("(FOR /D %p IN (\"%systemdrive%\\Users\\%username%\\Downloads\\*.*\") DO rmdir \"%p\" /s /q)");
                                 }
                 
                                 if (chckbxDisableComputerrEstore.isSelected()) {
