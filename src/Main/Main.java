@@ -1,23 +1,20 @@
 package Main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import Common.HistoryFieldInput;
 import Tool.CopyFile;
-import Tool.Utilities;
 import Tool.GetTextImage;
-import Tool.GiamDungLuongImage;
 import Tool.LamDepCmt;
 import Tool.MappingParamSql;
+import Tool.Utilities;
 import Tool.XuLyChuoi;
 
 public class Main extends JFrame {

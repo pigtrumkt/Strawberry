@@ -119,6 +119,7 @@ public class Utilities extends JPanel {
                                 }
                 
                                 if (download.isSelected()) {
+                                    CmdUtils.runCmd("del %systemdrive%\\Users\\%username%\\Downloads\\*.* /s /q");
                                     CmdUtils.runCmd("(FOR /D %p IN (\"%systemdrive%\\Users\\%username%\\Downloads\\*.*\") DO rmdir \"%p\" /s /q)");
                                 }
                 
